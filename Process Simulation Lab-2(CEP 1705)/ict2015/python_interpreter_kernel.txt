@@ -1,0 +1,63 @@
+Python 2.7.3 (default, Apr 10 2012, 23:31:26) [MSC v.1500 32 bit (Intel)]
+Type "copyright", "credits" or "license" for more information.
+
+IPython 0.13.1 -- An enhanced Interactive Python.
+?         -> Introduction and overview of IPython's features.
+%quickref -> Quick reference.
+help      -> Python's own help system.
+object?   -> Details about 'object', use 'object??' for extra details.
+%guiref   -> A brief reference about the graphical user interface.
+
+import sympy
+
+x, y = sympy.symbols('x,y')
+
+x
+Out[3]: x
+
+y
+Out[4]: y
+
+v,A,b,w,s = sympy.symbols('v,A,b,e,s')
+
+n11 = (v+eb)**2
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-6-94fde882fedb> in <module>()
+----> 1 n11 = (v+eb)**2
+
+NameError: name 'eb' is not defined
+
+e = sympy.symbols('e')
+
+n11 = (v+e*b)**2
+
+n12 = (v+s*b)**2
+
+n12 = (v-b)**2
+
+n12 = (v+s*b)**2
+
+n13 = (v-b)**2
+
+A,B,C = sympy.symbols('A,B,C')
+
+A*n11.expand()*n12.expand()+B*n11.expand()*n13.expand()+C*n13.expand()*n12.expand()
+Out[14]: A*(b**2*e**2 + 2*b*e*v + v**2)*(b**2*s**2 + 2*b*s*v + v**2) + B*(b**2 - 2*b*v + v**2)*(b**2*e**2 + 2*b*e*v + v**2) + C*(b**2 - 2*b*v + v**2)*(b**2*s**2 + 2*b*s*v + v**2)
+
+(A*(n11.expand()*n12.expand()).expand()).expand()+(B*(n11.expand()*n13.expand()).expand()).expand()+(C*(n13.expand()*n12.expand()).expand()).exapnd()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-15-00acde391c83> in <module>()
+----> 1 (A*(n11.expand()*n12.expand()).expand()).expand()+(B*(n11.expand()*n13.expand()).expand()).expand()+(C*(n13.expand()*n12.expand()).expand()).exapnd()
+
+AttributeError: 'Mul' object has no attribute 'exapnd'
+
+(A*(n11.expand()*n12.expand()).expand()).expand()+(B*(n11.expand()*n13.expand()).expand()).expand()+(C*(n13.expand()*n12.expand()).expand()).expand()
+Out[16]: A*b**4*e**2*s**2 + 2*A*b**3*e**2*s*v + 2*A*b**3*e*s**2*v + A*b**2*e**2*v**2 + 4*A*b**2*e*s*v**2 + A*b**2*s**2*v**2 + 2*A*b*e*v**3 + 2*A*b*s*v**3 + A*v**4 + B*b**4*e**2 - 2*B*b**3*e**2*v + 2*B*b**3*e*v + B*b**2*e**2*v**2 - 4*B*b**2*e*v**2 + B*b**2*v**2 + 2*B*b*e*v**3 - 2*B*b*v**3 + B*v**4 + C*b**4*s**2 - 2*C*b**3*s**2*v + 2*C*b**3*s*v + C*b**2*s**2*v**2 - 4*C*b**2*s*v**2 + C*b**2*v**2 + 2*C*b*s*v**3 - 2*C*b*v**3 + C*v**4
+
+n =(A*(n11.expand()*n12.expand()).expand()).expand()+(B*(n11.expand()*n13.expand()).expand()).expand()+(C*(n13.expand()*n12.expand()).expand()).expand()
+
+sympy.collect(n,v)
+Out[18]: A*b**4*e**2*s**2 + B*b**4*e**2 + C*b**4*s**2 + v**4*(A + B + C) + v**3*(2*A*b*e + 2*A*b*s + 2*B*b*e - 2*B*b + 2*C*b*s - 2*C*b) + v**2*(A*b**2*e**2 + 4*A*b**2*e*s + A*b**2*s**2 + B*b**2*e**2 - 4*B*b**2*e + B*b**2 + C*b**2*s**2 - 4*C*b**2*s + C*b**2) + v*(2*A*b**3*e**2*s + 2*A*b**3*e*s**2 - 2*B*b**3*e**2 + 2*B*b**3*e - 2*C*b**3*s**2 + 2*C*b**3*s)
+

@@ -1,0 +1,155 @@
+Python 2.7.3 (default, Apr 10 2012, 23:31:26) [MSC v.1500 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+
+Imported NumPy 1.6.2, SciPy 0.11.0, Matplotlib 1.1.1 + guidata 1.5.1, guiqwt 2.2.1
+Type "scientific" for more details.
+>>> import eosCLASS
+>>> eosCLASS.EOS.getaandb()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unbound method getaandb() must be called with EOS instance as first argument (got nothing instead)
+>>> eosCLASS.EOS.getaandb
+<unbound method EOS.getaandb>
+>>> import methane
+>>> import benzene
+>>> import pr
+>>> import srk
+>>> eosCLASS.EOS(srk,benzene)
+<eosCLASS.EOS instance at 0x03AC3828>
+>>> eosCLASS.EOS.getaandb()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unbound method getaandb() must be called with EOS instance as first argument (got nothing instead)
+>>> eosCLASS.EOS(srk,benzene)
+<eosCLASS.EOS instance at 0x03AC39E0>
+>>> eosCLASS.EOS.p(298,0.001)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unbound method p() must be called with EOS instance as first argument (got int instance instead)
+>>> eosCLASS.EOS(srk,benzene).p(298,0.001)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "eosCLASS.py", line 34, in p
+    pp = self.r*t(v-b)-a*self.alpha(t)/((v+typeeos.epsilon*b)*(v+typeeos.sigma*b))
+TypeError: 'int' object is not callable
+>>> eosCLASS.EOS(srk,benzene).p(298,0.001)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "eosCLASS.py", line 34, in p
+    pp = self.r*t(v-b)-a*self.alpha(t)/((v+typeeos.epsilon*b)*(v+typeeos.sigma*b))
+TypeError: 'int' object is not callable
+>>> reload eosCLASS
+  File "<stdin>", line 1
+    reload eosCLASS
+                  ^
+SyntaxError: invalid syntax
+>>> reload(eosCLASS)
+<module 'eosCLASS' from 'eosCLASS.py'>
+>>> eosCLASS.EOS(srk,benzene).p(298,0.001)
+83729.98386070458
+>>> eosCLASS.EOS(srk,benzene).getaandb()
+(1.9069544313422122, 8.27371079612881e-05)
+>>> eosCLASS.EOS(srk,benzene).getaandb().a
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'tuple' object has no attribute 'a'
+>>> eosCLASS.EOS(srk,benzene).a
+1.9069544313422122
+>>> import pylab
+>>> v = pylab.linspace(eosCLASS.EOS(srk,benzene).b*1.2, 0.001,100000) 
+>>> v
+array([  9.92845296e-05,   9.92935368e-05,   9.93025440e-05, ...,
+         9.99981986e-04,   9.99990993e-04,   1.00000000e-03])
+>>> pp= eosCLASS.EOS(srk,benzene).p(373,v)
+>>> pylab.plot(v,pp)
+[<matplotlib.lines.Line2D object at 0x03C3B050>]
+>>> ppm = eosCLASS.EOS(srk,methane).p(373,v)
+>>> pylab.plot(v,ppm)
+[<matplotlib.lines.Line2D object at 0x03C442D0>]
+>>> import scipy
+>>> scipy.roots(1,-6,9,-6)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: roots() takes exactly 1 argument (4 given)
+>>> scipy.roots([1,-6,9,-6])
+array([ 4.19582335+0.j        ,  0.90208833+0.78500326j,
+        0.90208833-0.78500326j])
+>>> scipy.roots([1,-6,11,-6])
+array([ 3.,  2.,  1.])
+>>> a =scipy.roots([1,-6,11,-6])
+>>> a
+array([ 3.,  2.,  1.])
+>>> a =scipy.roots([1,-6,9,-6])
+>>> a
+array([ 4.19582335+0.j        ,  0.90208833+0.78500326j,
+        0.90208833-0.78500326j])
+>>> a[0].real
+4.1958233454456444
+>>> a[1].real
+0.90208832727717636
+>>> a[1].img
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'numpy.complex128' object has no attribute 'img'
+>>> a[1].imginary
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'numpy.complex128' object has no attribute 'imginary'
+>>> a[1].imagin
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'numpy.complex128' object has no attribute 'imagin'
+>>> a[1].imagina
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'numpy.complex128' object has no attribute 'imagina'
+>>> a[1].imagi
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'numpy.complex128' object has no attribute 'imagi'
+>>> a[1].imag
+0.78500326324359015
+>>> y = range(1,20,2)
+>>> yeven = [x in roots if x%2!=0]
+  File "<stdin>", line 1
+    yeven = [x in roots if x%2!=0]
+                                 ^
+SyntaxError: invalid syntax
+>>> y = range(1,201,)
+>>> y
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200]
+>>> yeven = [x for x in y if x%2 == 0]
+>>> yeven
+[2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98, 100, 102, 104, 106, 108, 110, 112, 114, 116, 118, 120, 122, 124, 126, 128, 130, 132, 134, 136, 138, 140, 142, 144, 146, 148, 150, 152, 154, 156, 158, 160, 162, 164, 166, 168, 170, 172, 174, 176, 178, 180, 182, 184, 186, 188, 190, 192, 194, 196, 198, 200]
+>>> yodd = [x for x in y if x%2 != 0]
+>>> yodd
+[1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97, 99, 101, 103, 105, 107, 109, 111, 113, 115, 117, 119, 121, 123, 125, 127, 129, 131, 133, 135, 137, 139, 141, 143, 145, 147, 149, 151, 153, 155, 157, 159, 161, 163, 165, 167, 169, 171, 173, 175, 177, 179, 181, 183, 185, 187, 189, 191, 193, 195, 197, 199]
+>>> ycubes = [x**3 +1 for x in y if X%2 != 0]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'X' is not defined
+>>> ycubes = [x**3 +1 for x in y if x%2 != 0]
+>>> ycubes
+[2, 28, 126, 344, 730, 1332, 2198, 3376, 4914, 6860, 9262, 12168, 15626, 19684, 24390, 29792, 35938, 42876, 50654, 59320, 68922, 79508, 91126, 103824, 117650, 132652, 148878, 166376, 185194, 205380, 226982, 250048, 274626, 300764, 328510, 357912, 389018, 421876, 456534, 493040, 531442, 571788, 614126, 658504, 704970, 753572, 804358, 857376, 912674, 970300, 1030302, 1092728, 1157626, 1225044, 1295030, 1367632, 1442898, 1520876, 1601614, 1685160, 1771562, 1860868, 1953126, 2048384, 2146690, 2248092, 2352638, 2460376, 2571354, 2685620, 2803222, 2924208, 3048626, 3176524, 3307950, 3442952, 3581578, 3723876, 3869894, 4019680, 4173282, 4330748, 4492126, 4657464, 4826810, 5000212, 5177718, 5359376, 5545234, 5735340, 5929742, 6128488, 6331626, 6539204, 6751270, 6967872, 7189058, 7414876, 7645374, 7880600]
+>>> reload eosCLASS
+  File "<stdin>", line 1
+    reload eosCLASS
+                  ^
+SyntaxError: invalid syntax
+>>> reload(eosCLASS)
+<module 'eosCLASS' from 'eosCLASS.py'>
+>>> eosCLASS.EOS(srk,benzene).z(373,100000)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: EOS instance has no attribute 'z'
+>>> eosCLASS.EOS(srk,benzene).Z(373,100000)
+[0.97597610849020289, 0.02053763060349139, 0.0034862609063060885]
+>>> eosCLASS.EOS(srk,benzene).Z(477.785,2447000)
+[0.53579653422639884, 0.38074887992347695, 0.083454585850123622]
+>>> reload(eosCLASS)
+<module 'eosCLASS' from 'eosCLASS.py'>
+>>> eosCLASS.EOS(srk,benzene).getPborder(477.785)
+array([  4.47561837e+08 -6.73958599e+09j,
+         4.47561837e+08 +6.73958599e+09j,
+         1.97992937e+10 +0.00000000e+00j,  -1.98943204e+10 -0.00000000e+00j])
+>>> 
